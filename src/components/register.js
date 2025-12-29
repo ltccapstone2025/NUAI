@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, sendEmailVerification  } from 'firebase/auth'
 import {setDoc, doc} from "firebase/firestore"
 import {auth, firestore } from '../firebase'
 
@@ -17,15 +17,19 @@ const handleRegister = async (e)=>{
         const user = auth.currentUser;
         console.log(user);
 
-        if (user){
-            await setDoc(doc(firestore, "Users", user.uid), {
-                email: user.email,
-                firstName: fname,
-                lastName: lname,
-            });
-        }
+        await sendEmailVerification(user)
 
-        console.log("User Successfully Registerd")
+        await setDoc(doc(firestore, "Users", user.uid), {
+        email: user.email,
+        firstName: fname,
+        lastName: lname,
+        emailVerified: false
+      })
+
+      alert("Verification email sent. Please check your inbox.")
+      window.location.href = "/login"
+
+      
     } 
     catch (error)
     {

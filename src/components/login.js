@@ -9,16 +9,23 @@ const [email, setEmail] = useState("default")
 const [password, setPassword] = useState("default")
 
 const handleLogin = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
+
     try {
-        await signInWithEmailAndPassword (auth, email, password)
-        console.log("User Login Successfully")
-        window.location.href = "/profile"
-        
+      const userCredential = await signInWithEmailAndPassword(auth, email, password)
+      const user = userCredential.user
+
+      if (!user.emailVerified) {
+        alert("Please verify your email first.")
+        return
+      }
+
+      window.location.href = "/profile"
+
     } catch (error) {
-        console.log("Error Login")
+      alert("Invalid credentials")
     }
-}
+  }
     
 
   return (

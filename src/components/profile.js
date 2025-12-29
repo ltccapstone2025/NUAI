@@ -12,6 +12,11 @@ const fetchUserData = async () => {
         console.log(user);
         const docRef = doc(firestore, "Users", user.uid)
         const docSnap = await getDoc(docRef);
+
+        if (!user || !user.emailVerified) {
+        window.location.href = "/login"
+        return
+        }
         if (docSnap.exists()){
             setUserDetails(docSnap.data());
             console.log(docSnap.data());
