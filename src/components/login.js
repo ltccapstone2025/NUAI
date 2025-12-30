@@ -1,12 +1,15 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth, firestore } from '../firebase';
 import { useState } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+
 
 
 export default function Login() {
 
 const [email, setEmail] = useState("default")
 const [password, setPassword] = useState("default")
+
 
 const handleLogin = async (e) => {
     e.preventDefault()
@@ -20,7 +23,20 @@ const handleLogin = async (e) => {
         return
       }
 
-      window.location.href = "/profile"
+      const userDoc = await getDoc(doc(firestore, "Users", user.uid)) //details ng user
+
+      if (!userDoc.exists()) {
+        console.log("User data not found")
+      }
+
+      const role = userDoc.data().role
+
+      if (role === "admin") {
+        window.location.href = "/admin"
+      } else {
+        window.location.href = "/profile"
+      }
+
 
     } catch (error) {
       alert("Invalid credentials")

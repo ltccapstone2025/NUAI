@@ -50,7 +50,7 @@ useEffect(() => {
     <div>
     {userDetails ? (
         <>
-            <p>Welcome {userDetails.firstName}</p>
+            <p>Welcome {userDetails.firstName}, {userDetails.role}</p>
             <p>Email {userDetails.email}</p>
             <button onClick = {handleLogout}>Logout</button>
         </>

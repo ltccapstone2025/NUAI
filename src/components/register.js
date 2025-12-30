@@ -9,6 +9,8 @@ const [fname, setFname] = useState("default")
 const [lname, setLname] = useState("default")
 const [email, setEmail] = useState("default")
 const [password, setPassword] = useState("default")
+const [role, setRole] = useState("default")
+
 
 const handleRegister = async (e)=>{
     e.preventDefault();
@@ -23,7 +25,8 @@ const handleRegister = async (e)=>{
         email: user.email,
         firstName: fname,
         lastName: lname,
-        emailVerified: false
+        emailVerified: false,
+        role: "user"
       })
 
       alert("Verification email sent. Please check your inbox.")
