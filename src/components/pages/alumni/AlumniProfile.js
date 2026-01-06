@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { auth, firestore } from "../firebase";
+import { auth, firestore } from "../../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 
 
-export default function Profile() {
+export default function AlumniProfile() {
 
 const [userDetails, setUserDetails] = useState(null)
 const fetchUserData = async () => {
@@ -29,6 +29,15 @@ const fetchUserData = async () => {
     })
 };
 
+async function handleAnalyzeResume() {
+    try{
+        window.location.href = "/analyze-resume"
+    }
+    catch (error) {
+        console.error("Error moving to analyze resume", error.message)
+    }
+}
+
 async function handleLogout(){
     try{
         await auth.signOut()
@@ -47,17 +56,23 @@ useEffect(() => {
 
 
   return (
-    <div>
-    {userDetails ? (
-        <>
-            <p>Welcome {userDetails.firstName}, {userDetails.role}</p>
-            <p>Email {userDetails.email}</p>
-            <button onClick = {handleLogout}>Logout</button>
-        </>
-    ) : (
-        <p>Loading...</p>
-    )}
-    </div>
+    <>    
+        <div>
+        {userDetails ? (
+            <>
+                <p>Welcome {userDetails.firstName}, {userDetails.role}</p>
+                <p>Email: {userDetails.email}</p>
+                <button onClick={handleAnalyzeResume}>
+                    Analyze My Resume
+                </button>
+                <button onClick = {handleLogout}>Logout</button>
+            </>
+        ) : (
+            <p>Loading...</p>
+        )}
+        </div>
+        
+    </>
   )
 }
 

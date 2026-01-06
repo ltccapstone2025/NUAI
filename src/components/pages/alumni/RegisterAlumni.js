@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { createUserWithEmailAndPassword, sendEmailVerification  } from 'firebase/auth'
 import {setDoc, doc} from "firebase/firestore"
-import {auth, firestore } from '../firebase'
+import {auth, firestore } from '../../../firebase'
 
-export default function Register() {
+export default function RegisterAlumni() {
 
 const [fname, setFname] = useState("default")
 const [lname, setLname] = useState("default")

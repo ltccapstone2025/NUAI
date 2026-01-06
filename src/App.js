@@ -1,13 +1,12 @@
 import './App.css';
-import Register from './components/register';
-import Login from './components/login';
-import Profile from './components/profile';
-import Admin from './components/admin';
 import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import { auth } from './firebase';
 import { useEffect, useState } from 'react';
-
-
+import Admin from './components/pages/admin/Admin';
+import AlumniProfile from './components/pages/alumni/AlumniProfile';
+import AnalyzeResume from './components/pages/alumni/AnalyzeResume';
+import LoginPage from './components/pages/alumni/LoginPage';
+import RegisterAlumni from './components/pages/alumni/RegisterAlumni';
 
 
 
@@ -22,10 +21,11 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path = "/" element={user? <Navigate to = "/profile"/> : <Login/>} />
-          <Route path = "/login" element={<Login/>} />
-          <Route path = "/register" element={<Register/>} />
-          <Route path = "/profile" element={<Profile/>} />
+          <Route path = "/" element={user? <Navigate to = "/profile"/> : <LoginPage/>} />
+          <Route path = "/login" element={<LoginPage/>} />
+          <Route path = "/register" element={<RegisterAlumni/>} />
+          <Route path = "/profile" element={<AlumniProfile/>} />
+          <Route path = "/analyze-resume" element={<AnalyzeResume/>} />
           <Route path = "/admin" element={<Admin/>}/>
         </Routes>
       </Router>

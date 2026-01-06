@@ -1,11 +1,11 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth, firestore } from '../firebase';
+import { auth, firestore } from '../../../firebase';
 import { useState } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 
 
 
-export default function Login() {
+export default function LoginPage() {
 
 const [email, setEmail] = useState("default")
 const [password, setPassword] = useState("default")
